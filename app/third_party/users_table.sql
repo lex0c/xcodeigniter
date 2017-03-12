@@ -1,0 +1,10 @@
+CREATE TABLE users (
+  id INT unsigned AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  lastname VARCHAR(50),
+  email VARCHAR(100) NOT NULL UNIQUE,
+  password VARCHAR(80) NOT NULL,
+  token VARCHAR(80),
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

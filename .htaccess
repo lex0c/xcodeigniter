@@ -1,0 +1,20 @@
+RewriteEngine on
+
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http://yourdomain.com.br/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://yourdomain.com.br$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.yourdomain.com.br/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.yourdomain.com.br$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://yourdomain.com.br/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://yourdomain.com.br$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.yourdomain.com.br/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.yourdomain.com.br$      [NC]
+RewriteRule .*\.(jpg|jpeg|gif|png|bmp|pdf|svg)$ http://www.yourdomain.com.br [R,NC]
+
+RewriteCond %{REQUEST_URI} !public/
+RewriteCond %{HTTP_HOST} ^yourdomain.com.br$ [NC,OR]
+RewriteCond %{HTTP_HOST} ^www.yourdomain.com.br$
+RewriteRule (.*) /public/$1 [L]
+RewriteCond %{HTTP_HOST} ^yourdomain\.com\.br$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.yourdomain\.com\.br$
+RewriteRule ^public\/?$ "http\:\/\/yourdomain\.com\.br\/" [R=301,L]
