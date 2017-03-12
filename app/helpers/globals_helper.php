@@ -23,7 +23,7 @@ if (!function_exists('route'))
      * Route alias to call controller methods
      *
      * @param string $name
-     * @param int $id
+     * @param int    $id
      *
      * @return string
      */
@@ -31,6 +31,7 @@ if (!function_exists('route'))
     {
         $name = str_ireplace('.', DS, $name);
         $url  = ($id != null) ? base_url($name) . DS . "{$id}" : base_url($name);
+
         return $url;
     }
 }
@@ -41,7 +42,7 @@ if (!function_exists('spit'))
      * Scape the malicious scripts.
      *
      * @param string $data
-     * @param bool $scape
+     * @param bool   $scape
      *
      * @return string
      */
@@ -71,6 +72,7 @@ if (!function_exists('vdump')) {
      * Dump the passed variables and end the script.
      *
      * @param  mixed $data
+     *
      * @return void
      */
     function vdump($data)
@@ -88,7 +90,7 @@ if (!function_exists('ie_support_field')) {
      */
     function ie_support_field()
     {
-        $field = "<!--[if lte IE 8]>\n";
+        $field  = "<!--[if lte IE 8]>\n";
         $field .= '<script src='.'"'. asset('js/ie-support.min.js') .'"'.'></script>'."\n";
         $field .= "<![endif]-->\n";
 
@@ -107,6 +109,7 @@ if (! function_exists('csrf_field')) {
     function csrf_field($custom_id = '')
     {
         $CI =& get_instance();
+
         $token = $CI->security->get_csrf_hash();
         $tokenName = $CI->security->get_csrf_token_name();
 
@@ -127,6 +130,7 @@ if (!function_exists('auth_data')) {
     function auth_data()
     {
         $CI =& get_instance();
+
         if($CI->auth->can()) {
             return $CI->auth->get_user_data();
         }
@@ -146,6 +150,7 @@ if (!function_exists('get_validation_errors')) {
         $errors = trim(validation_errors());
         $errors = str_ireplace('<p>', '', $errors);
         $errors = str_ireplace('</p>', '', $errors);
+
         return array_filter(explode("\n", $errors));
     }
 }
@@ -183,7 +188,7 @@ if (!function_exists('pagination_styled')) {
 
 if (!function_exists('sender')) {
     /**
-     *
+     * Easily send email.
      *
      * @param string $from
      * @param string $name
@@ -199,6 +204,7 @@ if (!function_exists('sender')) {
         $CI->load->library('email');
 
         $CI->email->clear(true);
+
         $CI->email->from(
             $CI->security->xss_clean($from),
             $CI->security->xss_clean($name)
